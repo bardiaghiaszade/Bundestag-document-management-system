@@ -23,8 +23,8 @@ public class Protokoll extends Document {
      * @param sitzungsnummer die Nummer von der Sitzung
      */
     public Protokoll(int id, String title, Boolean isPublic,
-                      int sitzungsnummer) {
-        super(id, title, isPublic); //ruft erstmal den constructor von superclass Document auf
+                      int sitzungsnummer,String text) {
+        super(id, title, isPublic,text); //ruft erstmal den constructor von superclass Document auf
         this.sitzungsnummer = sitzungsnummer;
         this.redeListe = new ArrayList<>();
     }

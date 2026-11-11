@@ -40,7 +40,7 @@ public class DocumentFactory {
                     d.redner(), d.partei(), d.text());
 
             case PROTOKOLL -> new Protokoll(d.id(), d.title(), d.isPublic(),
-                    Objects.requireNonNull(d.sitzungsnummer(), "sitzungsnummer fehlt"));
+                    Objects.requireNonNull(d.sitzungsnummer(), "sitzungsnummer fehlt"), d.text());
         };
     }
 }

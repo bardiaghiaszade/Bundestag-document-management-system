@@ -5,7 +5,6 @@ package docs;
  * Erbt die gemeinsamen Eigenschaften von Document Class
  */
 public class Drucksache extends Document{
-    protected String text;
 
 
     /**
@@ -17,8 +16,7 @@ public class Drucksache extends Document{
      */
     public Drucksache(int id, String title, Boolean isPublic,
                       String text) {
-        super(id, title, isPublic); //ruft erstmal den constructor von superclass Document auf
-        this.text = text;
+        super(id, title, isPublic,text); //ruft erstmal den constructor von superclass Document auf
 
     }
 

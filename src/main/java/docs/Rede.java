@@ -8,7 +8,6 @@ public class Rede extends  Document {
 
     protected final String redner; //Kann nicht geändert werden
     protected final String partei; //Kann nicht geändert werden
-    protected String text;
 
 
     /**
@@ -22,10 +21,9 @@ public class Rede extends  Document {
      */
     public Rede(int id, String title, Boolean isPublic,
                       String redner, String partei, String text) {
-        super(id, title, isPublic); //ruft erstmal den constructor von superclass Document auf
+        super(id, title, isPublic,text); //ruft erstmal den constructor von superclass Document auf
         this.redner = redner;
         this.partei = partei;
-        this.text = text;
     }
 
 

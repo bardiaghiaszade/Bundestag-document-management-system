@@ -15,6 +15,7 @@ public abstract class Document {
     protected final LocalDateTime createdAt; //Kann nicht geändert werden
     protected LocalDateTime updatedAt;
     protected boolean isPublic;
+    protected  String text;
 
     /**
      *constructor
@@ -22,12 +23,13 @@ public abstract class Document {
      * @param title title von Dokument
      * @param isPublic ob man das z.B. als API Client sehen kann
      */
-    protected Document(int id, String title, Boolean isPublic) {
+    protected Document(int id, String title, Boolean isPublic, String text) {
         this.id = id;
         this.title = title;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = this.createdAt; //Am Anfang ist es letztes Mal beim Erstellen aktualisiert
         this.isPublic = isPublic;
+        this.text = text;
     }
 
     //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar weil die protected sind
@@ -54,6 +56,14 @@ public abstract class Document {
      */
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    /**
+     * text-getter
+     * @return inhalt des Dokuments
+     */
+    public String getText() {
+        return text;
     }
 
     /**
@@ -91,6 +101,14 @@ public abstract class Document {
         this.updatedAt = updatedAt;
     }
 
+    /**
+     * text-setter
+     * @param text neuer inhalt
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
+    
     /**
      * isPublic-setter
      * @param isPublic ein boolean der zeigt, ob Dokument öffentlich ist
