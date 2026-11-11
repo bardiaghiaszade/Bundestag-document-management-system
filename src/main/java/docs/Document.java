@@ -82,38 +82,47 @@ public abstract class Document {
         return isPublic;
     }
 
-     //Man kann nur für UpdateDatum, Permission und Titel eine setter-Funktion definieren
-     //CreateDatum oder ID sind final und haben keinen setter!
+    //Man kann nur für UpdateDatum, Permission und Titel eine setter-Funktion definieren
+    //CreateDatum oder ID sind final und haben keinen setter!
+    //
 
     /**
      * title-setter
+     * es gibt kein <public> weil package-private ist und nur in package docs und
+     * durch editor kann geändert werden
      * @param title neuer titel
      */
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
     /**
      * updateAt-setter
+     * es gibt kein <public> weil package-private ist und nur in package docs und
+     * durch editor kann geändert werden
      * @param updatedAt Datum von letzter Aktualisierung
      */
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     /**
      * text-setter
+     * es gibt kein <public> weil package-private ist und nur in package docs und
+     * durch editor kann geändert werden
      * @param text neuer inhalt
      */
-    public void setText(String text) {
+    void setText(String text) {
         this.text = text;
     }
     
     /**
      * isPublic-setter
+     * es gibt kein <public> weil package-private ist und nur in package docs und
+     * durch editor kann geändert werden
      * @param isPublic ein boolean der zeigt, ob Dokument öffentlich ist
      */
-    public void setPublic(boolean isPublic) {
+    void setPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
 

@@ -58,17 +58,21 @@ public class Protokoll extends Document {
 
     /**
      * neue Präsentationen in die Liste bringen
+     * es gibt kein <public> weil package-private ist und nur in package docs und
+     * durch editor kann geändert werden
      * @param rede eine neue Präsentation
      */
-    public void  addRede(Rede rede){
+    void  addRede(Rede rede){
         redeListe.add(rede);
     }
 
     /**
      * eine Präsentation löschen
+     * es gibt kein <public> weil package-private ist und nur in package docs und
+     * durch editor kann geändert werden
      * @param rede die schon in der Liste ist und wird entfernt
      */
-    public void  removeRede(Rede rede){
+    void  removeRede(Rede rede){
         redeListe.remove(rede);
     }
 

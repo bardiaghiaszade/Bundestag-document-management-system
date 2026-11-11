@@ -1,10 +1,11 @@
 package users.human;
+import users.Berechtigung;
 
 /**
  * Abstrakte Basisklasse für alle Benutzer.
  * Enthält gemeinsame EigenschafteDocumentation wie ID, first/last_name
  */
-public abstract class HumanUsers {
+public abstract class HumanUsers implements Berechtigung {
 
     protected final int id; //kann nicht geändert werden
     protected final String first_name; //kann nicht geändert werden

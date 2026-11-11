@@ -46,26 +46,11 @@ public class Rede extends  Document {
         return partei;
     }
 
-    /**
-     * text-getter
-     * @return inhalt
-     */
-    public String getText(){
-        return text;
-    }
 
      //Man kann für text einen setter schreiben um den Text von Drucksache aktualisieren zu können
      //Redner und Partei sind final und haben keinen setter.
      //Die andere getter/setter Funktionen werden von superclass Document geerbt
      //WICHTIG: wenn wir einen getter/setter von superclass Document ändern wöllten,
      //müssten wir das wieder schreiben (mit @override), hier ist es aber nicht der Fall!
-
-    /**
-     * text-setter
-     * @param text inhalt
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
 
 }
