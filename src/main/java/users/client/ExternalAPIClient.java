@@ -22,7 +22,7 @@ public class ExternalAPIClient implements Berechtigung {
     public ExternalAPIClient(int id, boolean isActive, String apiKeyHash){
         this.id = id;
         this.apiKeyHash = apiKeyHash;
-        this.isActive = true;
+        this.isActive = isActive;
     }
 
     //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar, weil die protected sind
@@ -58,7 +58,7 @@ public class ExternalAPIClient implements Berechtigung {
      * isActive-setter (aktualisieren)
      * @param isActive isActive
      */
-    public void setPartei(boolean isActive) {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 
