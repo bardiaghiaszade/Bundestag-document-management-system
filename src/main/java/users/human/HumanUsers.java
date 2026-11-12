@@ -3,14 +3,15 @@ import users.Berechtigung;
 
 /**
  * Abstrakte Basisklasse für alle Benutzer.
- * Enthält gemeinsame EigenschafteDocumentation wie ID, first/last_name
+ * Enthält gemeinsame EigenschaftenDocumentation wie ID, first/last_name
  */
 public abstract class HumanUsers implements Berechtigung {
 
-    protected final int id; //kann nicht geändert werden
-    protected final String first_name; //kann nicht geändert werden
-    protected final String last_name; //kann nicht geändert werden
-    protected String partei; //Partei kann man ändern
+    // Alle private: von außen nur über getter lesbar (Datenkapselung)
+    private final int id; //kann nicht geändert werden
+    private final String first_name; //kann nicht geändert werden
+    private final String last_name; //kann nicht geändert werden
+    private String partei; //Partei kann man ändern
 
 
     //OVERLOADING --->
@@ -42,7 +43,7 @@ public abstract class HumanUsers implements Berechtigung {
         this.last_name = last_name;
     }
 
-    //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar, weil die protected sind
+    //Alle getter sind public (von außen lesbar)
 
     /**
      * id-getter

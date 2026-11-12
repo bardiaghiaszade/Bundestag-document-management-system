@@ -5,7 +5,7 @@ import users.Berechtigung;
 /**
  * Logs-bearbeiter
  */
-public class LogsBearbeiter extends HumanUsers implements Berechtigung {
+public class LogsBearbeiter extends HumanUsers {
     /**
      * constructor ohne partei
      * @param id id

@@ -5,7 +5,7 @@ import users.Berechtigung;
 /**
  * Admin
  */
-public class Admin extends HumanUsers implements Berechtigung {
+public class Admin extends HumanUsers {
 
     /**
      * constructor ohne partei

@@ -5,7 +5,7 @@ import users.Berechtigung;
 /**
  * Abgeordneter
  */
-public class Abgeordneter extends HumanUsers implements Berechtigung {
+public class Abgeordneter extends HumanUsers  {
     /**
      * constructor mit partei
      * @param id id

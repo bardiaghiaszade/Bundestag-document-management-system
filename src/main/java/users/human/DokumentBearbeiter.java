@@ -5,7 +5,7 @@ import users.Berechtigung;
 /**
  * Dokument-bearbeiter
  */
-public class DokumentBearbeiter extends HumanUsers implements Berechtigung {
+public class DokumentBearbeiter extends HumanUsers {
     /**
      * constructor ohne partei
      * @param id id

@@ -8,9 +8,10 @@ import users.Berechtigung;
  */
 public class ExternalAPIClient implements Berechtigung {
 
-    protected final int id;
-    protected final String apiKeyHash;
-    protected boolean isActive;
+    // Alle private: von außen nur über getter lesbar (Datenkapselung)
+    private final int id;
+    private final String apiKeyHash;
+    private boolean isActive;
 
 
     /**
@@ -25,7 +26,7 @@ public class ExternalAPIClient implements Berechtigung {
         this.isActive = isActive;
     }
 
-    //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar, weil die protected sind
+    //Alle getter sind public (von außen lesbar)
 
     /**
      * id-getter
