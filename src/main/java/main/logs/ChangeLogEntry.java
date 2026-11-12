@@ -5,7 +5,8 @@ import java.time.LocalDateTime;
 /**
  * Ein einzelner Eintrag im Änderungs-Log.
  * Ein Eintrag beantwortet die Fragen: welches Dokument, wer, wann, was und von welchem Wert auf welchen.
- * Als record ist ein Eintrag unveränderbar, d.h. man kann ihn nach der Erstellung nicht mehr ändern.
+ * Als record ist ein Eintrag unveränderbar, d.h. man kann das nach der Erstellung nicht mehr ändern
+ * (sonst macht LOG keinen Sinn !)
  * @param documentId id des Dokuments, das geändert wurde
  * @param userId     id des Benutzers, der die Änderung gemacht hat
  * @param timestamp  Zeitpunkt der Änderung

@@ -61,7 +61,7 @@ public class JsonDocumentStorage implements DocumentStorage {
         List<Document> documents = new ArrayList<>();
         Map<Integer, Rede> reden = new HashMap<>();
 
-        //1) erst Drucksachen und Reden, weil Protokolle die Reden brauchen
+        //1) erst Drucksachen und Reden, weil Protokolle die Reden brauchen !!!
         for (DocumentJson j : list) {
             if (j.type() == DocumentType.DRUCKSACHE) {
                 documents.add(new Drucksache(j.id(), j.title(), j.publicAccess(),
@@ -74,7 +74,7 @@ public class JsonDocumentStorage implements DocumentStorage {
             }
         }
 
-        //2) dann die Protokolle, mit den schon geladenen Reden
+        //2) dann die Protokolle, mit den schon geladenen Reden (smart huh? :D )
         for (DocumentJson j : list) {
             if (j.type() == DocumentType.PROTOKOLL) {
                 List<Rede> redeListe = new ArrayList<>();
@@ -102,6 +102,7 @@ public class JsonDocumentStorage implements DocumentStorage {
 
     /**
      * Wandelt ein Dokument in das JSON-Format um
+     *
      * @param d das Dokument
      * @return das Dokument im JSON-Format
      */
