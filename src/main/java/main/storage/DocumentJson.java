@@ -1,6 +1,6 @@
-package storage;
+package main.storage;
 
-import docs.DocumentType;
+import main.docs.DocumentType;
 
 import java.time.LocalDateTime;
 import java.util.List;

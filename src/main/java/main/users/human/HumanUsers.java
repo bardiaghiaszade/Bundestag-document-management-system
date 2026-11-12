@@ -1,5 +1,5 @@
-package users.human;
-import users.Berechtigung;
+package main.users.human;
+import main.users.Berechtigung;
 
 /**
  * Abstrakte Basisklasse für alle Benutzer.

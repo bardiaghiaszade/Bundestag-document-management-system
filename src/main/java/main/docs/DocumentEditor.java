@@ -1,12 +1,12 @@
-package docs;
+package main.docs;
 
-import users.client.ExternalAPIClient;
-import factory.DocumentData;
-import factory.DocumentFactory;
-import logs.ChangeLogEntry;
-import logs.ChangeType;
-import storage.DocumentStorage;
-import users.human.HumanUsers;
+import main.users.client.ExternalAPIClient;
+import main.factory.DocumentData;
+import main.factory.DocumentFactory;
+import main.logs.ChangeLogEntry;
+import main.logs.ChangeType;
+import main.storage.DocumentStorage;
+import main.users.human.HumanUsers;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;

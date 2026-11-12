@@ -63,4 +63,20 @@
   "field" : "isPublic",
   "oldValue" : "false",
   "newValue" : "true"
+}, {
+  "documentId" : 1,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T15:00:02.2380493",
+  "type" : "VISIBILITY_CHANGED",
+  "field" : "isPublic",
+  "oldValue" : "true",
+  "newValue" : "false"
+}, {
+  "documentId" : 1,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T15:05:16.8893791",
+  "type" : "VISIBILITY_CHANGED",
+  "field" : "isPublic",
+  "oldValue" : "false",
+  "newValue" : "true"
 } ]

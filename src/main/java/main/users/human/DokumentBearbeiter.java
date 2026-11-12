@@ -1,6 +1,4 @@
-package users.human;
-
-import users.Berechtigung;
+package main.users.human;
 
 /**
  * Dokument-bearbeiter

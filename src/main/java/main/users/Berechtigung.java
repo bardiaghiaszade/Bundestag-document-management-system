@@ -1,4 +1,4 @@
-package users;
+package main.users;
 
 /**
  * Dies Interface setzt die Regel bezüglich Berechtigungen

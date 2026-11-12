@@ -1,20 +1,17 @@
-package users.human;
-
-import users.Berechtigung;
+package main.users.human;
 
 /**
- * Admin
+ * Abgeordneter
  */
-public class Admin extends HumanUsers {
-
+public class Abgeordneter extends HumanUsers  {
     /**
-     * constructor ohne partei
+     * constructor mit partei
      * @param id id
      * @param first_name vorname
      * @param last_name nachname
      */
-    public Admin(int id, String first_name, String last_name) {
-        super(id, first_name, last_name);
+    public Abgeordneter(int id, String first_name, String last_name, String partei) {
+        super(id, first_name, last_name, partei);
     }
 
     /**
@@ -23,7 +20,7 @@ public class Admin extends HumanUsers {
      */
     @Override
     public boolean darfBenutzerVerwalten() {
-        return true;
+        return false;
     }
 
     /**

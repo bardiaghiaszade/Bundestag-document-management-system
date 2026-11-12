@@ -1,4 +1,4 @@
-package logs;
+package main.logs;
 
 /**
  * Alle Arten von Änderungen.

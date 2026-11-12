@@ -1,19 +1,17 @@
-package users.human;
-
-import users.Berechtigung;
+package main.users.human;
 
 /**
- * Abgeordneter
+ * Logs-bearbeiter
  */
-public class Abgeordneter extends HumanUsers  {
+public class LogsBearbeiter extends HumanUsers {
     /**
-     * constructor mit partei
+     * constructor ohne partei
      * @param id id
      * @param first_name vorname
      * @param last_name nachname
      */
-    public Abgeordneter(int id, String first_name, String last_name, String partei) {
-        super(id, first_name, last_name, partei);
+    public LogsBearbeiter(int id, String first_name, String last_name) {
+        super(id, first_name, last_name);
     }
 
     /**
@@ -40,6 +38,6 @@ public class Abgeordneter extends HumanUsers  {
      */
     @Override
     public boolean darfLogsBearbeiten() {
-        return false;
+        return true;
     }
 }

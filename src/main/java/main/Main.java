@@ -1,15 +1,17 @@
-import docs.Document;
-import docs.DocumentEditor;
-import docs.DocumentType;
-import docs.Protokoll;
-import docs.Rede;
-import factory.DocumentData;
-import storage.DocumentStorage;
-import storage.JsonDocumentStorage;
-import users.client.ExternalAPIClient;
-import users.human.Abgeordneter;
-import users.human.DokumentBearbeiter;
-import users.human.LogsBearbeiter;
+package main;
+
+import main.docs.Document;
+import main.docs.DocumentEditor;
+import main.docs.DocumentType;
+import main.docs.Protokoll;
+import main.docs.Rede;
+import main.factory.DocumentData;
+import main.storage.DocumentStorage;
+import main.storage.JsonDocumentStorage;
+import main.users.client.ExternalAPIClient;
+import main.users.human.Abgeordneter;
+import main.users.human.DokumentBearbeiter;
+import main.users.human.LogsBearbeiter;
 
 import java.nio.file.Path;
 

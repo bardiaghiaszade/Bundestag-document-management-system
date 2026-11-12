@@ -1,16 +1,16 @@
-package storage;
+package main.storage;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import docs.Document;
-import docs.DocumentType;
-import docs.Drucksache;
-import docs.Protokoll;
-import docs.Rede;
-import logs.ChangeLogEntry;
+import main.docs.Document;
+import main.docs.DocumentType;
+import main.docs.Drucksache;
+import main.docs.Protokoll;
+import main.docs.Rede;
+import main.logs.ChangeLogEntry;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

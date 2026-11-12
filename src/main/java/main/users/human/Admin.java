@@ -1,18 +1,17 @@
-package users.human;
-
-import users.Berechtigung;
+package main.users.human;
 
 /**
- * Logs-bearbeiter
+ * Admin
  */
-public class LogsBearbeiter extends HumanUsers {
+public class Admin extends HumanUsers {
+
     /**
      * constructor ohne partei
      * @param id id
      * @param first_name vorname
      * @param last_name nachname
      */
-    public LogsBearbeiter(int id, String first_name, String last_name) {
+    public Admin(int id, String first_name, String last_name) {
         super(id, first_name, last_name);
     }
 
@@ -22,7 +21,7 @@ public class LogsBearbeiter extends HumanUsers {
      */
     @Override
     public boolean darfBenutzerVerwalten() {
-        return false;
+        return true;
     }
 
     /**
@@ -40,6 +39,6 @@ public class LogsBearbeiter extends HumanUsers {
      */
     @Override
     public boolean darfLogsBearbeiten() {
-        return true;
+        return false;
     }
 }

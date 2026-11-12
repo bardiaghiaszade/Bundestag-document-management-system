@@ -1,16 +1,17 @@
 package docs;
 
-import factory.DocumentData;
-import logs.ChangeLogEntry;
-import logs.ChangeType;
+import main.factory.DocumentData;
+import main.logs.ChangeLogEntry;
+import main.logs.ChangeType;
+import main.docs.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import storage.JsonDocumentStorage;
-import users.client.ExternalAPIClient;
-import users.human.Abgeordneter;
-import users.human.DokumentBearbeiter;
-import users.human.LogsBearbeiter;
+import main.storage.JsonDocumentStorage;
+import main.users.client.ExternalAPIClient;
+import main.users.human.Abgeordneter;
+import main.users.human.DokumentBearbeiter;
+import main.users.human.LogsBearbeiter;
 
 import java.nio.file.Path;
 import java.util.List;

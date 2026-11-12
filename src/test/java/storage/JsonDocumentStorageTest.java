@@ -1,11 +1,12 @@
 package storage;
 
-import docs.Document;
-import docs.Drucksache;
-import docs.Protokoll;
-import docs.Rede;
-import logs.ChangeLogEntry;
-import logs.ChangeType;
+import main.docs.Document;
+import main.docs.Drucksache;
+import main.docs.Protokoll;
+import main.docs.Rede;
+import main.logs.ChangeLogEntry;
+import main.logs.ChangeType;
+import main.storage.JsonDocumentStorage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 

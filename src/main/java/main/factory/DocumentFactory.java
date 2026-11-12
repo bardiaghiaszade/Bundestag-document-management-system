@@ -1,6 +1,7 @@
-package factory;
+package main.factory;
 
-import docs.*;
+import main.docs.*;
+
 import java.util.Objects;
 import java.util.List;
 import java.time.LocalDateTime;

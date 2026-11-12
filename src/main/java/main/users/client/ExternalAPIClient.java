@@ -1,6 +1,6 @@
-package users.client;
+package main.users.client;
 
-import users.Berechtigung;
+import main.users.Berechtigung;
 
 /**
  * Diese Klasse ist bezüglich external API CLIents und ob die die Dokumente

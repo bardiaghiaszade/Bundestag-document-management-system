@@ -1,4 +1,4 @@
-package docs;
+package main.docs;
 
 /**
  * Alle Dokumenttypen des Systems.

@@ -1,7 +1,7 @@
-package storage;
+package main.storage;
 
-import docs.Document;
-import logs.ChangeLogEntry;
+import main.docs.Document;
+import main.logs.ChangeLogEntry;
 
 import java.util.List;
 
