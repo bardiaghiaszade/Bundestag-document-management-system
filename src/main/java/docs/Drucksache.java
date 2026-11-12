@@ -1,11 +1,12 @@
 package docs;
 
+import java.time.LocalDateTime;
+
 /**
  * Ein Typ von Dokumenten.
  * Erbt die gemeinsamen Eigenschaften von Document Class
  */
-public class Drucksache extends Document{
-
+public class Drucksache extends Document {
 
     /**
      * constructor
@@ -13,21 +14,13 @@ public class Drucksache extends Document{
      * @param title titel
      * @param isPublic ob man das z.B. als API Client sehen kann
      * @param text Inhalt
+     * @param createdAt Erstellungsdatum
+     * @param updatedAt Datum der letzten Änderung
      */
-    public Drucksache(int id, String title, Boolean isPublic,
-                      String text) {
-        super(id, title, isPublic,text); //ruft erstmal den constructor von superclass Document auf
-
+    public Drucksache(int id, String title, boolean isPublic,
+                      String text, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        super(id, title, isPublic, text, createdAt, updatedAt); //ruft erstmal den constructor von superclass Document auf
     }
 
-
-    //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar, weil die protected sind
-
-
-     //Man kann für text einen setter schreiben um den Text von Drucksache aktualisieren zu können
-     //Andere getter/setter Funktionen werden von superclass Document geerbt
-     //WICHTIG: wenn wir einen getter/setter von superclass Document ändern wöllten,
-     //müssten wir das wieder schreiben (mit @override), hier ist es aber nicht der Fall!
-
-
+    //Alle getter/setter Funktionen (auch für text) werden von superclass Document geerbt
 }

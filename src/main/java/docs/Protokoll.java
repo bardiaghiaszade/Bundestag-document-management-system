@@ -1,5 +1,6 @@
 package docs;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,13 +8,13 @@ import java.util.List;
 /**
  * Ein Typ von Dokumenten.
  * Erbt die gemeinsamen Eigenschaften von Document Class
+ * Ein Protokoll besteht aus den Reden, die in der Sitzung gehalten wurden.
  */
 public class Protokoll extends Document {
 
-    protected final int sitzungsnummer; //Kann nicht geändert werden
+    private final int sitzungsnummer; //Kann nicht geändert werden
     // eine finale Liste kann inhaltlich geändert werden(z.B. mit add)!
-    protected final List<Rede> redeListe;
-
+    private final List<Rede> redeListe;
 
     /**
      * constructor
@@ -21,61 +22,54 @@ public class Protokoll extends Document {
      * @param title titel
      * @param isPublic ob man das z.B. als API Client sehen kann
      * @param sitzungsnummer die Nummer von der Sitzung
+     * @param text text
+     * @param createdAt Erstellungsdatum
+     * @param updatedAt Datum der letzten Änderung
+     * @param reden die Reden des Protokolls (neues Protokoll: leere Liste)
      */
-    public Protokoll(int id, String title, Boolean isPublic,
-                      int sitzungsnummer,String text) {
-        super(id, title, isPublic,text); //ruft erstmal den constructor von superclass Document auf
+    public Protokoll(int id, String title, boolean isPublic, int sitzungsnummer, String text,
+                     LocalDateTime createdAt, LocalDateTime updatedAt, List<Rede> reden) {
+        super(id, title, isPublic, text, createdAt, updatedAt); //ruft erstmal den constructor von superclass Document auf
         this.sitzungsnummer = sitzungsnummer;
-        this.redeListe = new ArrayList<>();
+        this.redeListe = new ArrayList<>(reden); //Kopie, damit die übergebene Liste nicht verändert wird
     }
-
-    //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar, weil die protected sind
 
     /**
      * sitzungsnummer-getter
      * @return sitzungsnummer
      */
-    public int getSitzungsnummer(){
+    public int getSitzungsnummer() {
         return sitzungsnummer;
     }
 
     /**
      * redeListe-getter
-     * @return eine Liste von Präsentationen
+     * @return eine Liste von Reden (nur lesbar)
      */
-    public List<Rede> getRedeListe(){
+    public List<Rede> getRedeListe() {
         return Collections.unmodifiableList(redeListe);
     }
 
-
-
-
-     //Kein setter, sondern List verwaltung
-     //Andere getter/setter Funktionen werden von superclass Document geerbt
-     //WICHTIG: wenn wir einen getter/setter von superclass Document ändern wöllten,
-     //müssten wir das wieder schreiben (mit @override), hier ist es aber nicht der Fall!
-
+    //Kein setter, sondern Listenverwaltung
+    //Alle anderen getter/setter Funktionen werden von superclass Document geerbt
 
     /**
-     * neue Präsentationen in die Liste bringen
+     * neue Rede in die Liste bringen
      * es gibt kein <public> weil package-private ist und nur in package docs und
      * durch editor kann geändert werden
-     * @param rede eine neue Präsentation
+     * @param rede eine neue Rede
      */
-    void  addRede(Rede rede){
+    void addRede(Rede rede) {
         redeListe.add(rede);
     }
 
     /**
-     * eine Präsentation löschen
+     * eine Rede löschen
      * es gibt kein <public> weil package-private ist und nur in package docs und
      * durch editor kann geändert werden
      * @param rede die schon in der Liste ist und wird entfernt
      */
-    void  removeRede(Rede rede){
+    void removeRede(Rede rede) {
         redeListe.remove(rede);
     }
-
-
 }
-

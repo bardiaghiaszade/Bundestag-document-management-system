@@ -2,9 +2,9 @@ package docs;
 
 import factory.DocumentData;
 import factory.DocumentFactory;
-import logs.ChangeLog;
 import logs.ChangeLogEntry;
 import logs.ChangeType;
+import storage.DocumentStorage;
 import users.human.HumanUsers;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,10 +12,11 @@ import java.util.Objects;
 
 /**
  * Der Editor ist der einzige Weg, ein Dokument zu erstellen oder zu ändern.
- * Bei jeder Aktion macht er drei Dinge:
+ * Bei jeder Aktion macht er vier Dinge:
  * 1) die Berechtigung des Benutzers prüfen,
  * 2) die Änderung am Dokument durchführen,
- * 3) die Änderung im {@link ChangeLog} festhalten.
+ * 3) die Änderung im Änderungs-Log festhalten (changelog.json),
+ * 4) das geänderte Dokument speichern (documents.json).
  * Weil alle Methoden mit {@link Document} arbeiten, funktioniert der Editor
  * für jeden Dokumenttyp, auch für neue Typen, die später dazukommen.
  * Er liegt im package docs, weil die SETTER der Dokumente nur innerhalb
@@ -23,27 +24,33 @@ import java.util.Objects;
  */
 public class DocumentEditor {
 
-    private final ChangeLog changeLog;
+    private final DocumentStorage storage;
 
     /**
      * constructor
-     * @param changeLog das Log, in das alle Änderungen geschrieben werden
+     * @param storage hier werden die Dokumente und das Änderungs-Log gespeichert
      */
-    public DocumentEditor(ChangeLog changeLog) {
-        this.changeLog = Objects.requireNonNull(changeLog, "changeLog fehlt");
+    public DocumentEditor(DocumentStorage storage) {
+        this.storage = Objects.requireNonNull(storage, "storage fehlt");
     }
 
     /**
-     * Ein neues Dokument erstellen (mithilfe der {@link DocumentFactory}) und im Log festhalten.
+     * Ein neues Dokument erstellen (mithilfe der {@link DocumentFactory}), speichern und im Log festhalten.
      * @param by Benutzer, der das Dokument erstellt
      * @param data Daten für das neue Dokument
      * @return das neue Dokument
      * @throws SecurityException wenn der Benutzer kein Recht hat
+     * @throws IllegalArgumentException wenn es die id schon gibt
      */
     public Document createDocument(HumanUsers by, DocumentData data) {
         pruefeBerechtigung(by);
+        //eine schon vorhandene id würde das gespeicherte Dokument überschreiben
+        if (storage.loadAllDocuments().stream().anyMatch(d -> d.getId() == data.id())) {
+            throw new IllegalArgumentException("Dokument mit id " + data.id() + " existiert schon");
+        }
         Document doc = DocumentFactory.create(data);
-        changeLog.add(new ChangeLogEntry(doc.getId(), by.getId(), doc.getCreatedAt(),
+        storage.saveDocument(doc);
+        storage.appendLogEntry(new ChangeLogEntry(doc.getId(), by.getId(), doc.getCreatedAt(),
                 ChangeType.CREATED, "document", null, doc.getTitle()));
         return doc;
     }
@@ -154,7 +161,9 @@ public class DocumentEditor {
         if (!by.darfLogsBearbeiten()) {
             throw new SecurityException("Keine Berechtigung für Logs");
         }
-        return changeLog.getHistory(documentId);
+        return storage.loadLogEntries().stream()
+                .filter(e -> e.documentId() == documentId)
+                .toList();
     }
 
     //Hilfsmethoden (private, nur für den Editor selbst)
@@ -172,7 +181,8 @@ public class DocumentEditor {
     }
 
     /**
-     * Schreibt einen Eintrag ins Log und setzt updatedAt des Dokuments auf denselben Zeitpunkt.
+     * Schreibt einen Eintrag ins Log (changelog.json), setzt updatedAt des Dokuments auf denselben
+     * Zeitpunkt und speichert das geänderte Dokument (documents.json).
      * @param doc das geänderte Dokument
      * @param by der Benutzer
      * @param type typ
@@ -183,9 +193,10 @@ public class DocumentEditor {
     private void logChange(Document doc, HumanUsers by, ChangeType type,
                            String field, String oldValue, String newValue) {
         LocalDateTime now = LocalDateTime.now();
-        changeLog.add(new ChangeLogEntry(doc.getId(), by.getId(), now,
-                type, field, oldValue, newValue));
         doc.setUpdatedAt(now);
+        storage.appendLogEntry(new ChangeLogEntry(doc.getId(), by.getId(), now,
+                type, field, oldValue, newValue));
+        storage.saveDocument(doc); //das geänderte Dokument sofort speichern
     }
 
     /**

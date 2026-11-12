@@ -1,14 +1,15 @@
 package docs;
 
+import java.time.LocalDateTime;
+
 /**
  * Ein Typ von Dokumenten.
  * Erbt die gemeinsamen Eigenschaften von Document Class
  */
-public class Rede extends  Document {
+public class Rede extends Document {
 
-    protected final String redner; //Kann nicht geändert werden
-    protected final String partei; //Kann nicht geändert werden
-
+    private final String redner; //Kann nicht geändert werden
+    private final String partei; //Kann nicht geändert werden
 
     /**
      * constructor
@@ -18,23 +19,21 @@ public class Rede extends  Document {
      * @param redner Ein benutzer aus Abgeordneter Klasse
      * @param partei partei
      * @param text inhalt
+     * @param createdAt Erstellungsdatum
+     * @param updatedAt Datum der letzten Änderung
      */
-    public Rede(int id, String title, Boolean isPublic,
-                      String redner, String partei, String text) {
-        super(id, title, isPublic,text); //ruft erstmal den constructor von superclass Document auf
+    public Rede(int id, String title, boolean isPublic, String redner, String partei,
+                String text, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        super(id, title, isPublic, text, createdAt, updatedAt); //ruft erstmal den constructor von superclass Document auf
         this.redner = redner;
         this.partei = partei;
     }
-
-
-    //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar, weil die protected sind
-
 
     /**
      * redner-getter
      * @return Die Person die gesprochen hat
      */
-    public String getRedner(){
+    public String getRedner() {
         return redner;
     }
 
@@ -42,15 +41,10 @@ public class Rede extends  Document {
      * partei-getter
      * @return Die Partei von der Person die gesprochen hat
      */
-    public String getPartei(){
+    public String getPartei() {
         return partei;
     }
 
-
-     //Man kann für text einen setter schreiben um den Text von Drucksache aktualisieren zu können
-     //Redner und Partei sind final und haben keinen setter.
-     //Die andere getter/setter Funktionen werden von superclass Document geerbt
-     //WICHTIG: wenn wir einen getter/setter von superclass Document ändern wöllten,
-     //müssten wir das wieder schreiben (mit @override), hier ist es aber nicht der Fall!
-
+    //Redner und Partei sind final und haben keinen setter.
+    //Alle anderen getter/setter Funktionen werden von superclass Document geerbt
 }

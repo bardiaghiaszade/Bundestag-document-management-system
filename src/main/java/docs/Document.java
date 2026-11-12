@@ -9,30 +9,55 @@ import java.time.LocalDateTime;
 
 public abstract class Document {
 
-    // Alle protected damit man sie innerhalb eines packages erreichen kann
-    protected final int id; //Kann nicht geändert werden
-    protected String title;
-    protected final LocalDateTime createdAt; //Kann nicht geändert werden
-    protected LocalDateTime updatedAt;
-    protected boolean isPublic;
-    protected  String text;
+    // Alle private: von außen nur über getter lesbar und nur durch den Editor änderbar (Datenkapselung)
+    private final int id; //Kann nicht geändert werden
+    private String title;
+    private final LocalDateTime createdAt; //Kann nicht geändert werden
+    private LocalDateTime updatedAt;
+    private boolean isPublic;
+    private String text;
 
     /**
-     *constructor
+     * constructor
      * @param id id von Dokument (final)
      * @param title title von Dokument
      * @param isPublic ob man das z.B. als API Client sehen kann
+     * @param text text
+     * @param createdAt Erstellungsdatum (neues Dokument: jetzt, aus JSON geladen: das gespeicherte Datum)
+     * @param updatedAt Datum der letzten Änderung (neues Dokument: genau wie bei createdAt)
      */
-    protected Document(int id, String title, Boolean isPublic, String text) {
+    protected Document(int id, String title, boolean isPublic, String text,
+                       LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = this.createdAt; //Am Anfang ist es letztes Mal beim Erstellen aktualisiert
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.isPublic = isPublic;
         this.text = text;
     }
 
-    //Alle getter Funktionen hier sind nur innerhalb dieses packages erreichbar weil die protected sind
+    /**
+     * Zwei Dokumente sind gleich, wenn sie vom gleichen Typ sind und die gleiche id haben.
+     * Wichtig, weil bei jedem Laden aus der Datei neue Objekte entstehen
+     * (sonst würde z.B. redeListe.contains(rede) nicht funktionieren).
+     * @param o das andere Objekt
+     * @return true, wenn beide dasselbe Dokument sind
+     */
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Document d && d.getClass() == getClass() && d.id == id;
+    }
+
+    /**
+     * hashCode passend zu equals
+     * @return die id
+     */
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    //Alle getter sind public, die setter sind package-private (nur der Editor darf ändern)
 
     /**
      * id-getter
@@ -82,9 +107,8 @@ public abstract class Document {
         return isPublic;
     }
 
-    //Man kann nur für UpdateDatum, Permission und Titel eine setter-Funktion definieren
+    //Man kann nur für UpdateDatum, Permission, Text und Titel eine setter-Funktion definieren
     //CreateDatum oder ID sind final und haben keinen setter!
-    //
 
     /**
      * title-setter
@@ -115,7 +139,7 @@ public abstract class Document {
     void setText(String text) {
         this.text = text;
     }
-    
+
     /**
      * isPublic-setter
      * es gibt kein <public> weil package-private ist und nur in package docs und
@@ -125,6 +149,4 @@ public abstract class Document {
     void setPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
-
-
 }
