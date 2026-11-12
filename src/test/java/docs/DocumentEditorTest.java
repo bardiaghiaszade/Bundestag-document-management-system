@@ -1,3 +1,5 @@
+package docs;
+
 import factory.DocumentData;
 import logs.ChangeLogEntry;
 import logs.ChangeType;
@@ -105,7 +107,7 @@ class DocumentEditorTest {
         //neu aus der Datei laden: die Rede muss noch im Protokoll sein
         Protokoll reloaded = (Protokoll) load(3);
         assertEquals(1, reloaded.getRedeListe().size());
-        assertEquals(2, reloaded.getRedeListe().get(0).getId());
+        assertEquals(2, reloaded.getRedeListe().getFirst().getId());
 
         //eine Änderung am neu geladenen Protokoll darf die Reden nicht löschen
         editor.changeTitle(reloaded, anna, "Neuer Titel");
@@ -131,7 +133,7 @@ class DocumentEditorTest {
         List<Document> visible = editor.getPublicDocuments(new ExternalAPIClient(1, true, "hash"));
 
         assertEquals(1, visible.size());
-        assertEquals(1, visible.get(0).getId());
+        assertEquals(1, visible.getFirst().getId());
     }
 
     @Test

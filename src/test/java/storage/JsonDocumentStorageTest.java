@@ -1,3 +1,5 @@
+package storage;
+
 import docs.Document;
 import docs.Drucksache;
 import docs.Protokoll;
@@ -42,7 +44,7 @@ class JsonDocumentStorageTest {
         assertEquals("Anna Beispiel", ((Rede) loaded.get(1)).getRedner());
         Protokoll p = (Protokoll) loaded.get(2);
         assertEquals(57, p.getSitzungsnummer());
-        assertSame(loaded.get(1), p.getRedeListe().get(0)); //dieselbe Rede, keine Kopie
+        assertSame(loaded.get(1), p.getRedeListe().getFirst()); //dieselbe Rede, keine Kopie
         assertEquals(List.of(entry), storage.loadLogEntries());
     }
 
@@ -56,6 +58,6 @@ class JsonDocumentStorageTest {
         storage.saveDocument(new Drucksache(1, "Neu", true, "Text", time, time));
 
         assertEquals(1, storage.loadAllDocuments().size());
-        assertEquals("Neu", storage.loadAllDocuments().get(0).getTitle());
+        assertEquals("Neu", storage.loadAllDocuments().getFirst().getTitle());
     }
 }
