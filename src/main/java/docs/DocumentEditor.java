@@ -1,5 +1,6 @@
 package docs;
 
+import users.client.ExternalAPIClient;
 import factory.DocumentData;
 import factory.DocumentFactory;
 import logs.ChangeLogEntry;
@@ -163,6 +164,23 @@ public class DocumentEditor {
         }
         return storage.loadLogEntries().stream()
                 .filter(e -> e.documentId() == documentId)
+                .toList();
+    }
+
+    /**
+     * Alle öffentlichen Dokumente lesen (für die Öffentlichkeit über die API).
+     * Dokumente mit isPublic == false bekommt ein API Client nie zu sehen.
+     * @param client der API Client, der lesen möchte
+     * @return alle Dokumente mit isPublic == true
+     * @throws SecurityException wenn der API Client nicht aktiv ist
+     */
+    public List<Document> getPublicDocuments(ExternalAPIClient client) {
+        Objects.requireNonNull(client, "client fehlt");
+        if (!client.getIsActive()) {
+            throw new SecurityException("API Client ist nicht aktiv");
+        }
+        return storage.loadAllDocuments().stream()
+                .filter(Document::isPublic)
                 .toList();
     }
 
