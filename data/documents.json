@@ -1,0 +1,47 @@
+[ {
+  "type" : "DRUCKSACHE",
+  "id" : 2,
+  "title" : "Gesetzentwurf zur Digitalisierung der Verwaltung",
+  "publicAccess" : false,
+  "createdAt" : "2026-11-12T13:24:29.7004508",
+  "updatedAt" : "2026-11-12T13:24:29.7004508",
+  "text" : "Behördengänge sollen künftig vollständig online möglich sein."
+}, {
+  "type" : "REDE",
+  "id" : 3,
+  "title" : "Rede zum Klimaschutz",
+  "publicAccess" : true,
+  "createdAt" : "2026-11-12T13:24:29.7094504",
+  "updatedAt" : "2026-11-12T13:24:29.7094504",
+  "text" : "Sehr geehrte Damen und Herren, der Klimaschutz duldet keinen Aufschub.",
+  "redner" : "Anna Beispiel",
+  "partei" : "Partei A"
+}, {
+  "type" : "REDE",
+  "id" : 4,
+  "title" : "Rede zur Digitalisierung",
+  "publicAccess" : true,
+  "createdAt" : "2026-11-12T13:24:29.7134496",
+  "updatedAt" : "2026-11-12T13:24:29.7134496",
+  "text" : "Die Digitalisierung der Verwaltung ist überfällig.",
+  "redner" : "Max Mustermann",
+  "partei" : "Partei B"
+}, {
+  "type" : "PROTOKOLL",
+  "id" : 5,
+  "title" : "Plenarprotokoll Sitzung 57",
+  "publicAccess" : true,
+  "createdAt" : "2026-11-12T13:24:29.7174524",
+  "updatedAt" : "2026-11-12T13:24:29.7364495",
+  "text" : "Tagesordnung: Klimaschutz, Digitalisierung der Verwaltung",
+  "sitzungsnummer" : 57,
+  "redeIds" : [ 3, 4 ]
+}, {
+  "type" : "DRUCKSACHE",
+  "id" : 1,
+  "title" : "Antrag zum Klimaschutz",
+  "publicAccess" : true,
+  "createdAt" : "2026-11-12T13:24:29.5164027",
+  "updatedAt" : "2026-11-12T13:24:31.532283",
+  "text" : "Der Bundestag möge beschließen, den Ausbau erneuerbarer Energien zu beschleunigen."
+} ]

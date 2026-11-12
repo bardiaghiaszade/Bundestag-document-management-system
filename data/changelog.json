@@ -1,0 +1,66 @@
+[ {
+  "documentId" : 1,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.5164027",
+  "type" : "CREATED",
+  "field" : "document",
+  "newValue" : "Antrag zum Klimaschutz"
+}, {
+  "documentId" : 2,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.7004508",
+  "type" : "CREATED",
+  "field" : "document",
+  "newValue" : "Gesetzentwurf zur Digitalisierung der Verwaltung"
+}, {
+  "documentId" : 3,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.7094504",
+  "type" : "CREATED",
+  "field" : "document",
+  "newValue" : "Rede zum Klimaschutz"
+}, {
+  "documentId" : 4,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.7134496",
+  "type" : "CREATED",
+  "field" : "document",
+  "newValue" : "Rede zur Digitalisierung"
+}, {
+  "documentId" : 5,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.7174524",
+  "type" : "CREATED",
+  "field" : "document",
+  "newValue" : "Plenarprotokoll Sitzung 57"
+}, {
+  "documentId" : 5,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.7304534",
+  "type" : "REDE_ADDED",
+  "field" : "redeListe",
+  "newValue" : "Rede 3 (Rede zum Klimaschutz, Anna Beispiel)"
+}, {
+  "documentId" : 5,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.7364495",
+  "type" : "REDE_ADDED",
+  "field" : "redeListe",
+  "newValue" : "Rede 4 (Rede zur Digitalisierung, Max Mustermann)"
+}, {
+  "documentId" : 1,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:29.7464491",
+  "type" : "VISIBILITY_CHANGED",
+  "field" : "isPublic",
+  "oldValue" : "true",
+  "newValue" : "false"
+}, {
+  "documentId" : 1,
+  "userId" : 1,
+  "timestamp" : "2026-11-12T13:24:31.532283",
+  "type" : "VISIBILITY_CHANGED",
+  "field" : "isPublic",
+  "oldValue" : "false",
+  "newValue" : "true"
+} ]
