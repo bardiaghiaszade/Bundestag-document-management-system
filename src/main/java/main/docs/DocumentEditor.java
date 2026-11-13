@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Der Editor ist der einzige Weg, ein Dokument zu erstellen oder zu ändern.
+ * Der Editor ist DER EINZIGE WEG, ein Dokument zu erstellen oder zu ändern.
  * Bei jeder Aktion macht er vier Dinge:
  * 1) die Berechtigung des Benutzers prüfen,
  * 2) die Änderung am Dokument durchführen,
@@ -61,7 +61,7 @@ public class DocumentEditor {
      * @param doc das Dokument
      * @param by Benutzer, der ändert
      * @param newTitle neuer Titel
-     * @throws SecurityException        wenn der Benutzer kein Recht hat
+     * @throws SecurityException wenn der Benutzer kein Recht hat
      * @throws IllegalArgumentException wenn der Titel leer ist
      */
     public void changeTitle(Document doc, HumanUsers by, String newTitle) {
@@ -117,7 +117,7 @@ public class DocumentEditor {
      * @param protokoll das Protokoll
      * @param rede die neue Rede
      * @param by Benutzer, der ändert
-     * @throws SecurityException     wenn der Benutzer kein Recht hat
+     * @throws SecurityException wenn der Benutzer kein Recht hat
      * @throws IllegalStateException wenn die Rede schon im Protokoll ist
      */
     public void addRede(Protokoll protokoll, Rede rede, HumanUsers by) {
@@ -136,7 +136,7 @@ public class DocumentEditor {
      * @param protokoll das Protokoll
      * @param rede die Rede, die entfernt wird
      * @param by Benutzer, der ändert
-     * @throws SecurityException        wenn der Benutzer kein Recht hat
+     * @throws SecurityException wenn der Benutzer kein Recht hat
      * @throws IllegalArgumentException wenn die Rede nicht im Protokoll ist
      */
     public void removeRede(Protokoll protokoll, Rede rede, HumanUsers by) {
@@ -169,7 +169,7 @@ public class DocumentEditor {
 
     /**
      * Alle öffentlichen Dokumente lesen (für die Öffentlichkeit über die API).
-     * Dokumente mit isPublic == false bekommt ein API Client nie zu sehen.
+     * Dokumente mit isPublic == false bekommt ein API-Client nie zu sehen.
      * @param client der API Client, der lesen möchte
      * @return alle Dokumente mit isPublic == true
      * @throws SecurityException wenn der API Client nicht aktiv ist

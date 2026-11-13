@@ -102,7 +102,6 @@ public class JsonDocumentStorage implements DocumentStorage {
 
     /**
      * Wandelt ein Dokument in das JSON-Format um
-     *
      * @param d das Dokument
      * @return das Dokument im JSON-Format
      */

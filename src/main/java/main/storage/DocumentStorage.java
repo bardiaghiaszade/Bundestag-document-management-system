@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Schnittstelle zum Speichern und Laden der Dokumente und des Änderungs-Logs.
  * Die Dateien sind die einzige Quelle der Daten, es gibt keine Listen im Speicher:
- * jede Änderung wird sofort gespeichert.
+ * Jede Änderung wird sofort gespeichert.
  * Bei Problemen mit der Datei wird eine {@link java.io.UncheckedIOException} geworfen.
  */
 public interface DocumentStorage {

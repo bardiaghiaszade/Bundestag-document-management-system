@@ -16,7 +16,6 @@ import main.users.human.LogsBearbeiter;
 import java.nio.file.Path;
 
 /**
- * Demo des Bundestags-Dokumentenmanagementsystems.
  * Beim ersten Start werden Testdaten angelegt (data/documents.json und data/changelog.json).
  * Danach werden die Dateien nur noch gelesen und geändert.
  */

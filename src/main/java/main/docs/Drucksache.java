@@ -22,5 +22,5 @@ public class Drucksache extends Document {
         super(id, title, isPublic, text, createdAt, updatedAt); //ruft erstmal den constructor von superclass Document auf
     }
 
-    //Alle getter/setter Funktionen (auch für text) werden von superclass Document geerbt
+    //Alle getter/setter Funktionen werden von superclass Document geerbt
 }

@@ -25,11 +25,7 @@ public class DocumentFactory {
     }
 
     /**
-     * Erstellt anhand der übergebenen Daten ein Dokument des passenden Typs z.B.
-     * DRUCKSACHE: erzeugt eine {@link Drucksache}
-     * REDE: erzeugt eine {@link Rede}
-     * PROTOKOLL: erzeugt ein {@link Protokoll}
-     *
+     * Erstellt anhand der übergebenen Daten ein Dokument des passenden Typs
      * @param d die Daten für das neue Dokument
      * @return das neu erstellte Dokument
      * @throws NullPointerException wenn der Typ fehlt oder bei einem Protokoll die Sitzungsnummer fehlt

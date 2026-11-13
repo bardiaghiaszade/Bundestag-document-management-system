@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Ein Typ von Dokumenten.
- * Erbt die gemeinsamen Eigenschaften von Document Class
+ * Erbt die gemeinsamen Eigenschaften von Document Class.
  * Ein Protokoll besteht aus den Reden, die in der Sitzung gehalten wurden.
  */
 public class Protokoll extends Document {
@@ -50,7 +50,7 @@ public class Protokoll extends Document {
         return Collections.unmodifiableList(redeListe);
     }
 
-    //Kein setter, sondern Listenverwaltung
+    //Kein setter, sondern Listenverwaltung.
     //Alle anderen getter/setter Funktionen werden von superclass Document geerbt
 
     /**
