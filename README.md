@@ -1,3 +1,6 @@
+# For a better and quicker understanding of the project, take a look at the UML diagrams!
+
+
 # Bundestag Document Management System
 
 Small Java 21 / Maven project that manages Bundestag documents (Drucksache, Rede, Protokoll) in JSON files, with a change log for every edit.
