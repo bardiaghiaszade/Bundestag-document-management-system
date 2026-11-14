@@ -1,0 +1,102 @@
+\begin{tikzpicture}
+
+\begin{umlpackage}[x=-1, y=0,fill=black!50]{Main}
+
+    \umlclass[x=-12, y=-10]{main}{}{}
+
+    % DOCS
+
+    \begin{umlpackage}[x=-10, y=0,fill=white]{docs}
+
+        \umlclass[x=0, y=-2, fill=green!20]{Document<abstract>}{}{}
+        \umlclass[x=-2.5, y=-3.5]{DocumentEditor}{}{}
+        \umlclass[x=2, y=-3.5,fill=orange!30]{DocumentType<enum>}{}{}
+
+        \umlclass[x=-3, y=-5]{Drucksache}{}{}
+        \umlclass[x=0, y=-5]{Rede}{}{}
+        \umlclass[x=3, y=-5]{Protokoll}{}{}
+
+    \end{umlpackage}
+
+
+    % FACTORY 
+
+    \begin{umlpackage}[x=0, y=0,fill=white]{factory}
+
+        \umlclass[x=0, y=-2]{DocumentFactory}{}{}
+        \umlclass[x=0, y=-3.5,fill=blue!65]{DocumentData<record>}{}{}
+
+    \end{umlpackage}
+
+
+    % LOGS
+
+    \begin{umlpackage}[x=3, y=-6,fill=white]{logs}
+
+        \umlclass[x=0, y=-2,fill=blue!65]{ChangeLogEntry<record>}{}{}
+        \umlclass[x=0, y=-3.5,fill=orange!30]{ChangeType<enum>}{}{}
+
+    \end{umlpackage}
+
+
+    % STORAGE
+
+    \begin{umlpackage}[x=2, y=-11,fill=white]{storage}
+
+        \umlclass[x=0, y=-2,fill=purple]{DocumentStorage<interface>}{}{}
+        \umlclass[x=0, y=-6]{JsonDocumentStorage}{}{}
+        \umlclass[x=0, y=-4,fill=blue!65]{DocumentJson<record>}{}{}
+
+    \end{umlpackage}
+
+
+    % USERS
+
+    \begin{umlpackage}[x=-8, y=-11,fill=white]{users}
+
+        \umlclass[x=-3.2, y=-3.2,fill=purple]{Berechtigung<interface>}{}{}
+
+        \begin{umlpackage}[x=-2, y=-4]{human}
+
+            \umlclass[x=-1.6, y=-2,fill=green!20]{HumanUsers<abstract>}{}{}
+            \umlclass[x=-3, y=-3.5]{Admin}{}{}
+            \umlclass[x=3.1, y=-2]{DokumentBearbeiter}{}{}
+            \umlclass[x=-0.1, y=-3.5]{LogsBearbeiter}{}{}
+            \umlclass[x=3.2, y=-3.5]{Abgeordneter}{}{}
+
+        \end{umlpackage}
+
+
+        \begin{umlpackage}[x=2, y=1]{client}
+
+            \umlclass[x=0, y=-5]{ExternalAPIClient}{}{}
+
+        \end{umlpackage}
+
+    \end{umlpackage}
+
+
+
+    % ABHAENGIGKEITEN
+
+    % docs <-> factory und docs <-> storage
+    \umlrelation[]{docs}{factory}
+    \umlrelation[]{docs}{storage}
+    \umldep{docs}{logs}
+    \umldep{storage}{logs}
+    % docs nutzt HumanUsers (users.human) und ExternalAPIClient (users.client)
+    \umldep{docs}{users}
+    \umldep{human}{Berechtigung<interface>}
+    \umldep{client}{Berechtigung<interface>}
+    \umldep{main}{docs}
+    \umldep{main}{factory}
+    \umldep{main}{storage}
+    % Main nutzt Benutzer aus users.human und users.client
+    \umldep{main}{users}
+
+    
+\end{umlpackage}
+
+
+
+\end{tikzpicture}

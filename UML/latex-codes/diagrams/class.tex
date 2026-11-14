@@ -1,0 +1,430 @@
+\begin{landscape}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.45, transform shape]
+
+
+% MAIN
+
+
+\umlclass[x=0, y=12, name=mainClass]{Main}
+{}
+{
+    + main(args : String[]) : void {static}
+}
+
+
+
+% DOCS
+
+
+\umlclass[x=-20, y=7, name=documentClass, fill=green!20]{Document<abstract>}
+{
+    - id : int {readOnly} \\
+    - title : String \\
+    - createdAt : LocalDateTime {readOnly} \\
+    - updatedAt : LocalDateTime \\
+    - isPublic : boolean \\
+    - text : String
+}
+{
+    \# Document(id, title, isPublic, text, createdAt, updatedAt) \\
+    + equals(o : Object) : boolean \\
+    + hashCode() : int \\
+    + getId() : int \\
+    + getTitle() : String \\
+    + getCreatedAt() : LocalDateTime \\
+    + getText() : String \\
+    + getUpdatedAt() : LocalDateTime \\
+    + isPublic() : boolean \\
+    \textasciitilde setTitle(title : String) : void \\
+    \textasciitilde setUpdatedAt(updatedAt : LocalDateTime) : void \\
+    \textasciitilde setText(text : String) : void \\
+    \textasciitilde setPublic(isPublic : boolean) : void
+}
+
+\umlclass[x=-7.5, y=3.5, name=documentEditor]{DocumentEditor}
+{ 
+    - storage : DocumentStorage {readOnly}
+}
+{
+    + DocumentEditor(storage : DocumentStorage) \\
+    + createDocument(by : HumanUsers, data : DocumentData) : Document \\
+    + changeTitle(doc, by, newTitle) : void \\
+    + changeText(doc, by, newText) : void \\
+    + changeVisibility(doc, by, isPublic) : void \\
+    + addRede(protokoll, rede, by) : void \\
+    + removeRede(protokoll, rede, by) : void \\
+    + getHistory(documentId, by) : List<ChangeLogEntry> \\
+    + getPublicDocuments(client) : List<Document> \\
+    - pruefeBerechtigung(by) : void \\
+    - logChange(doc, by, type, field, oldValue, newValue) : void \\
+    - beschreibe(rede) : String
+}
+
+\umlclass[x=-11, y=-7, name=documentType, fill=orange!30]{DocumentType<enum>}
+{
+    DRUCKSACHE \\
+    PROTOKOLL \\
+    REDE
+}
+{}
+
+\umlclass[x=-8, y=-33, name=drucksache]{Drucksache}
+{}
+{
+    + Drucksache(id, title, isPublic, text, createdAt, updatedAt)
+}
+
+\umlclass[x=-14, y=-30, name=rede]{Rede}
+{
+    - redner : String {readOnly} \\
+    - partei : String {readOnly}
+}
+{
+    + Rede(id, title, isPublic, redner, partei, text, createdAt, updatedAt) \\
+    + getRedner() : String \\
+    + getPartei() : String
+}
+
+\umlclass[x=-20, y=-25, name=protokoll]{Protokoll}
+{
+    - sitzungsnummer : int {readOnly} \\
+    - redeListe : List<Rede> {readOnly}
+}
+{
+    + Protokoll(id, title, isPublic, sitzungsnummer, text, createdAt, updatedAt, reden) \\
+    + getSitzungsnummer() : int \\
+    + getRedeListe() : List<Rede> \\
+    \textasciitilde addRede(rede : Rede) : void \\
+    \textasciitilde removeRede(rede : Rede) : void
+}
+
+
+
+% FACTORY
+
+
+\umlclass[x=-8, y=10, name=documentFactory]{DocumentFactory}
+{}
+{
+    - DocumentFactory() \\
+    + create(d : DocumentData) : Document {static}
+}
+
+\umlclass[x=-3, y=-9, name=documentData, fill=blue!65]{DocumentData<record>}
+{
+    - type : DocumentType \\
+    - id : int \\
+    - title : String \\
+    - isPublic : boolean \\
+    - redner : String \\
+    - partei : String \\
+    - text : String \\
+    - sitzungsnummer : Integer
+}
+{
+    + DocumentData(...) \\
+    + type() : DocumentType \\
+    + id() : int \\
+    + title() : String \\
+    + isPublic() : boolean \\
+    + redner() : String \\
+    + partei() : String \\
+    + text() : String \\
+    + sitzungsnummer() : Integer
+}
+
+
+
+% LOGS
+
+
+\umlclass[x=7, y=7.5, name=changeLogEntry, fill=blue!65]{ChangeLogEntry<record>}
+{
+    - documentId : int \\
+    - userId : int \\
+    - timestamp : LocalDateTime \\
+    - type : ChangeType \\
+    - field : String \\
+    - oldValue : String \\
+    - newValue : String \\
+    + toString : String
+}
+{
+    + ChangeLogEntry(...) \\
+    + documentId() : int \\
+    + userId() : int \\
+    + timestamp() : LocalDateTime \\
+    + type() : ChangeType \\
+    + field() : String \\
+    + oldValue() : String \\
+    + newValue() : String
+}
+
+\umlclass[x=4, y=-7, name=changeType, fill=orange!30]{ChangeType<enum>}
+{
+    CREATED \\
+    TITLE\_CHANGED \\
+    TEXT\_CHANGED \\
+    VISIBILITY\_CHANGED \\
+    REDE\_ADDED \\
+    REDE\_REMOVED
+}
+{}
+
+
+
+% STORAGE
+
+
+\umlclass[x=15, y=1.5, name=documentStorage, fill=purple]{DocumentStorage<interface>}
+{}
+{
+    + saveDocument(document : Document) : void \\
+    + loadAllDocuments() : List<Document> \\
+    + appendLogEntry(entry : ChangeLogEntry) : void \\
+    + loadLogEntries() : List<ChangeLogEntry>
+}
+
+\umlclass[x=15, y=-4, name=jsonDocumentStorage]{JsonDocumentStorage}
+{
+    - documentsFile : Path {readOnly} \\
+    - changeLogFile : Path {readOnly} \\
+    - mapper : ObjectMapper {readOnly}
+}
+{
+    + JsonDocumentStorage(documentsFile, changeLogFile) \\
+    + saveDocument(document) : void \\
+    + loadAllDocuments() : List<Document> \\
+    + appendLogEntry(entry) : void \\
+    + loadLogEntries() : List<ChangeLogEntry> \\
+    - toJson(d : Document) : DocumentJson {static} \\
+    - read(file, type) : List<T> \\
+    - write(file, data) : void
+}
+
+\umlclass[x=-5, y=-21, name=documentJson, fill=blue!65]{DocumentJson<record>}
+{
+    - type : DocumentType \\
+    - id : int \\
+    - title : String \\
+    - publicAccess : boolean \\
+    - createdAt : LocalDateTime \\
+    - updatedAt : LocalDateTime \\
+    - text : String \\
+    - redner : String \\
+    - partei : String \\
+    - sitzungsnummer : Integer \\
+    - redeIds : List<Integer>
+}
+{
+    + DocumentJson(...) \\
+    + type() : DocumentType \\
+    + id() : int \\
+    + title() : String \\
+    + publicAccess() : boolean \\
+    + createdAt() : LocalDateTime \\
+    + updatedAt() : LocalDateTime \\
+    + text() : String \\
+    + redner() : String \\
+    + partei() : String \\
+    + sitzungsnummer() : Integer \\
+    + redeIds() : List<Integer>
+}
+
+
+
+% USERS
+
+
+\umlclass[x=15, y=-9, name=berechtigung, fill=purple]{Berechtigung<interface>}
+{}
+{
+    + darfBenutzerVerwalten() : boolean \\
+    + darfDokumenteBearbeiten() : boolean \\
+    + darfLogsBearbeiten() : boolean
+}
+
+\umlclass[x=7, y=-14, name=humanUsers, fill=green!20]{HumanUsers<abstract>}
+{
+    - id : int {readOnly} \\
+    - first\_name : String {readOnly} \\
+    - last\_name : String {readOnly} \\
+    - partei : String
+}
+{
+    \# HumanUsers(id, first\_name, last\_name, partei) \\
+    \# HumanUsers(id, first\_name, last\_name) \\
+    + getId() : int \\
+    + getName() : String \\
+    + getPartei() : String \\
+    + setPartei(partei) : void
+}
+
+\umlclass[x=16, y=-23, name=admin]{Admin}
+{}
+{
+    + Admin(id, first\_name, last\_name) \\
+    + darfBenutzerVerwalten() : boolean \\
+    + darfDokumenteBearbeiten() : boolean \\
+    + darfLogsBearbeiten() : boolean
+}
+
+\umlclass[x=12, y=-26, name=dokumentBearbeiter]{DokumentBearbeiter}
+{}
+{
+    + DokumentBearbeiter(id, first\_name, last\_name) \\
+    + darfBenutzerVerwalten() : boolean \\
+    + darfDokumenteBearbeiten() : boolean \\
+    + darfLogsBearbeiten() : boolean
+}
+
+\umlclass[x=8, y=-29, name=logsBearbeiter]{LogsBearbeiter}
+{}
+{
+    + LogsBearbeiter(id, first\_name, last\_name) \\
+    + darfBenutzerVerwalten() : boolean \\
+    + darfDokumenteBearbeiten() : boolean \\
+    + darfLogsBearbeiten() : boolean
+}
+
+\umlclass[x=4, y=-32, name=abgeordneter]{Abgeordneter}
+{}
+{
+    + Abgeordneter(id, first\_name, last\_name, partei) \\
+    + darfBenutzerVerwalten() : boolean \\
+    + darfDokumenteBearbeiten() : boolean \\
+    + darfLogsBearbeiten() : boolean
+}
+
+\umlclass[x=15.5, y=-14, name=externalAPIClient]{ExternalAPIClient}
+{
+    - id : int {readOnly} \\
+    - apiKeyHash : String {readOnly} \\
+    - isActive : boolean
+}
+{
+    + ExternalAPIClient(id, isActive, apiKeyHash) \\
+    + getId() : int \\
+    + getApiKeyHash() : String \\
+    + getIsActive() : boolean \\
+    + setIsActive(isActive) : void \\
+    + darfBenutzerVerwalten() : boolean \\
+    + darfDokumenteBearbeiten() : boolean \\
+    + darfLogsBearbeiten() : boolean
+}
+
+
+
+
+
+
+
+% RELATIONSHIPS
+
+
+
+
+
+
+
+
+
+% MAIN
+
+\umlVHdep{mainClass}{documentEditor}
+\umlVHdep{mainClass}{jsonDocumentStorage}
+\umlVHdep{mainClass}{documentData}
+\umlVHdep{mainClass}{documentType}
+\umlVHdep{mainClass}{documentClass}
+\umlVHdep{mainClass}{rede}
+\umlVHdep{mainClass}{protokoll}
+\umlVHdep{mainClass}{dokumentBearbeiter}
+\umlVHdep{mainClass}{logsBearbeiter}
+\umlVHdep{mainClass}{abgeordneter}
+\umlVHdep{mainClass}{externalAPIClient}
+
+
+% DOCUMENT INHERITANCE
+
+\umlinherit{drucksache}{documentClass}
+\umlinherit{rede}{documentClass}
+\umlinherit{protokoll}{documentClass}
+
+% Protokoll contains a list of Rede objects
+\umluniaggreg{protokoll}{rede}
+
+
+% DOCUMENT EDITOR 
+
+% Actual stored field
+\umluniassoc{documentEditor}{documentStorage}
+
+% Uses / method parameters / return types
+\umlHVdep{documentEditor}{documentFactory}
+\umlHVdep{documentEditor}{documentData}
+\umlHVdep{documentEditor}{documentClass}
+\umlHVdep{documentEditor}{humanUsers}
+\umlHVdep{documentEditor}{externalAPIClient}
+\umlHVdep{documentEditor}{protokoll}
+\umlHVdep{documentEditor}{rede}
+\umlHVdep{documentEditor}{changeLogEntry}
+\umlHVdep{documentEditor}{changeType}
+
+
+% FACTORY 
+
+\umlHVdep{documentFactory}{documentData}
+\umlHVdep{documentFactory}{documentType}
+\umlHVdep{documentFactory}{documentClass}
+\umlHVdep{documentFactory}{drucksache}
+\umlHVdep{documentFactory}{rede}
+\umlHVdep{documentFactory}{protokoll}
+
+
+% STORAGE 
+
+% JsonDocumentStorage implements DocumentStorage
+\umlreal{jsonDocumentStorage}{documentStorage}
+
+% Interface method types
+\umlHVdep{documentStorage}{documentClass}
+\umlHVdep{documentStorage}{changeLogEntry}
+
+% JSON implementation
+\umlHVdep{jsonDocumentStorage}{documentJson}
+\umlHVdep{jsonDocumentStorage}{documentType}
+\umlHVdep{jsonDocumentStorage}{documentClass}
+\umlHVdep{jsonDocumentStorage}{drucksache}
+\umlHVdep{jsonDocumentStorage}{rede}
+\umlHVdep{jsonDocumentStorage}{protokoll}
+\umlHVdep{jsonDocumentStorage}{changeLogEntry}
+
+
+% RECORDS AND ENUMS 
+
+\umlHVdep{documentData}{documentType}
+\umlHVdep{documentJson}{documentType}
+\umlHVdep{changeLogEntry}{changeType}
+
+
+% USERS 
+
+% HumanUsers implements Berechtigung
+\umlreal{humanUsers}{berechtigung}
+
+% ExternalAPIClient implements Berechtigung
+\umlreal{externalAPIClient}{berechtigung}
+
+% HumanUsers subclasses
+\umlinherit{admin}{humanUsers}
+\umlinherit{dokumentBearbeiter}{humanUsers}
+\umlinherit{logsBearbeiter}{humanUsers}
+\umlinherit{abgeordneter}{humanUsers}
+
+
+\end{tikzpicture}
+\end{center}
+
+\end{landscape}

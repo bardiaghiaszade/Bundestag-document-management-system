@@ -1,0 +1,89 @@
+\begin{tikzpicture}
+
+
+    \umlactor[x=0, y=5]{User};
+    \umlactor[x=10, y=2]{Human};
+    \umlactor[x=-5, y=2]{Client};
+    
+    \umlactor[x=12.5, y=-8 ]{Admin};
+    \umlactor[x=10, y=-4]{Dokument-bearbeiter};
+    \umlactor[x=9, y=-2 ]{Logs-bearbeiter};
+    \umlactor[x=11, y=-6]{Abgeordneter};
+    
+    \umlactor[x=-5, y=-3.5]{External API Client};
+
+
+    \begin{umlsystem}[
+        x=0,
+        y=0,
+        fill=black!30
+    ]{Bundestags-Dokumentenmanagementsystem}
+
+        \umlusecase[x=5, y=-5, name=Dokument bearbeiten]{Dokument bearbeiten}
+        \umlusecase[x=5, y=-7, name=Rede halten]{Rede halten}
+        \umlusecase[x=-1, y=-8,fill=blue!65, name=Check Permission]{Check Permission}
+
+        \umlusecase[x=-1, y=0, name=Dokumente lesen]{Dokumente lesen}
+        \umlusecase[x=0, y=-4,fill=red!65,  name=Check Öffentlichkeit]{Check Öffentlichkeit}
+        
+        \umlusecase[x=5, y=-8, name=Benutzer verwalten]{Benutzer verwalten}
+        
+        \umlusecase[x=4, y=-2, name=Logs bearbeiten]{Logs bearbeiten}
+        
+
+        \umlusecase[x=5, y=0,fill=red!65, name=Logs history]{Logs history}
+
+    \end{umlsystem}
+
+
+    \umlnote[x=-5, y=-6]{Check Öffentlichkeit}{
+        nur bei External API Client
+    }
+    
+
+    \umlnote[x=5, y=-10]{Benutzer verwalten}{
+        muss später entwickelt werden
+    }
+
+ %   \umlnote[x=0, y=-15]{Logs bearbeiten}{
+  %  Logs verwalten umfasst :\\
+   % - Logs lesen\\
+    %- Logs exportieren\\
+    %- Logs sichern
+    %}
+
+
+
+    \umlnote[x=5, y=3]{Logs history}{
+        Logs history ändert sich nicht immer !\\
+        zB muss nicht beim <Logs lesen> etwas geändert werden !
+    }
+
+
+
+    \umlassoc{Admin}{Benutzer verwalten}
+    \umlassoc{Logs-bearbeiter}{Logs bearbeiten}
+    \umlassoc{Dokument-bearbeiter}{Dokument bearbeiten}
+    \umlassoc{User}{Dokumente lesen}
+    \umlassoc{Abgeordneter}{Rede halten}
+
+    \umlinclude{Dokument bearbeiten}{Check Permission}
+    \umlinclude{Logs bearbeiten}{Check Permission}
+    \umlinclude{Benutzer verwalten}{Check Permission}
+    \umlinclude{Dokument bearbeiten}{Dokumente lesen}
+    \umlextend{Logs bearbeiten}{Logs history}
+    \umlextend{Dokumente lesen}{Check Öffentlichkeit}
+
+    \umlinherit{Client}{User}
+    \umlinherit{Human}{User}
+    \umlinherit{External API Client}{Client}
+    \umlinherit{Admin}{Human}
+    \umlinherit{Abgeordneter}{Human}
+    \umlinherit{Logs-bearbeiter}{Human}
+    \umlinherit{Dokument-bearbeiter}{Human}
+
+
+
+
+
+\end{tikzpicture}
