@@ -1,0 +1,76 @@
+\section{Use-Case-Notation}
+
+
+\subsection{Use-Case: Dokumente lesen}
+\begin{description}
+    \item[Vorbedingung:] User bekannt; API Client aktiv.
+    \item[Ergebnis:] Dokumente anzeigen; API Client nur öffentliche Dokumente.
+    \item[Akteure:] Alle User
+    \item[Ablauf:] Dokumente anfordern $\rightarrow$ aus \texttt{documents.json} laden $\rightarrow$ anzeigen.
+    \item[Umsetzung:] \texttt{DocumentEditor.getPublicDocuments}, \texttt{DocumentStorage.loadAllDocuments}
+\end{description}
+
+\subsection{Use-Case: Check Öffentlichkeit}
+\begin{description}
+    \item[Vorbedingung:] API Client aktiv.
+    \item[Ergebnis:] Nur Dokumente mit \texttt{isPublic = true}.
+    \item[Akteur:] External API Client
+    \item[Ablauf:] Client prüfen $\rightarrow$ Dokumente filtern.
+    \item[Umsetzung:] \texttt{DocumentEditor.getPublicDocuments(ExternalAPIClient)}
+\end{description}
+
+\subsection{Use-Case: Dokument bearbeiten}
+\begin{description}
+    \item[Vorbedingung:] Dokument-bearbeiter; Dokument ausgewählt.
+    \item[Ergebnis:] Dokument geändert und gespeichert; Eintrag in \texttt{changelog.json}; \texttt{updatedAt} aktualisiert.
+    \item[Akteur:] Dokument-bearbeiter
+    \item[Ablauf:] Dokument auswählen $\rightarrow$ Änderung wählen $\rightarrow$ Berechtigung und Eingabe prüfen $\rightarrow$ speichern.
+    \item[Erweiterung:] Neues Dokument erstellen; Rede zum Protokoll hinzufügen oder entfernen.
+    \item[Umsetzung:] \texttt{createDocument}, \texttt{changeTitle}, \texttt{changeText}, \texttt{changeVisibility}, \texttt{addRede}, \texttt{removeRede}
+\end{description}
+
+\subsection{Use-Case: Check Permission}
+\begin{description}
+    \item[Vorbedingung:] Geschützte Funktion wird gestartet.
+    \item[Ergebnis:] Berechtigung vorhanden $\rightarrow$ Fortsetzung; sonst Abbruch.
+    \item[Ablauf:] Berechtigung für Dokumente, Logs oder Benutzerverwaltung prüfen.
+    \item[Umsetzung:] Interface \texttt{Berechtigung}, \texttt{DocumentEditor.pruefeBerechtigung}
+\end{description}
+
+\subsection{Use-Case: Logs bearbeiten}
+\begin{description}
+    \item[Vorbedingung:] Berechtigung zum Lesen der Logs.
+    \item[Ergebnis:] Änderungs-Log anzeigen; keine Änderungen oder Löschungen möglich.
+    \item[Akteur:] Logs-bearbeiter
+    \item[Ablauf:] Logs öffnen $\rightarrow$ Berechtigung prüfen $\rightarrow$ \texttt{changelog.json} laden.
+    \item[Erweiterung:] Logs eines bestimmten Dokuments anzeigen.
+    \item[Umsetzung:] \texttt{DocumentEditor.getHistory}, \texttt{DocumentStorage.loadLogEntries}
+\end{description}
+
+\subsection{Use-Case: Logs history}
+\begin{description}
+    \item[Vorbedingung:] Berechtigung geprüft; Dokument-ID vorhanden.
+    \item[Ergebnis:] Änderungshistorie mit Benutzer, Zeitpunkt und alten/neuen Werten.
+    \item[Akteur:] Logs-bearbeiter
+    \item[Ablauf:] Dokument-ID eingeben $\rightarrow$ Einträge filtern $\rightarrow$ anzeigen.
+    \item[Hinweis:] Keine neuen Log-Einträge beim Lesen.
+    \item[Umsetzung:] \texttt{DocumentEditor.getHistory(documentId, by)}
+\end{description}
+
+\subsection{Use-Case: Benutzer verwalten}
+\begin{description}
+    \item[Vorbedingung:] Admin-Rechte.
+    \item[Ergebnis:] Benutzerberechtigungen ändern; Benutzer blockieren.
+    \item[Akteur:] Admin
+    \item[Ablauf:] Benutzer auswählen $\rightarrow$ Berechtigungen ändern.
+    \item[Hinweis:] Noch nicht implementiert; Berechtigung in \texttt{Berechtigung} vorbereitet.
+\end{description}
+
+\subsection{Use-Case: Rede halten}
+\begin{description}
+    \item[Vorbedingung:] Abgeordneter zum Reden aufgerufen; Protokoll vorhanden.
+    \item[Ergebnis:] Rede mit Redner, Partei und Text gespeichert und dem Protokoll zugeordnet.
+    \item[Akteur:] Abgeordneter
+    \item[Ablauf:] Rede halten $\rightarrow$ Dokument-bearbeiter erfasst die Rede und fügt sie dem Protokoll hinzu.
+    \item[Hinweis:] Abgeordneter ohne Systemberechtigungen.
+\end{description}

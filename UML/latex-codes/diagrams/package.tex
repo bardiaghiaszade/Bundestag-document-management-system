@@ -1,8 +1,9 @@
 \begin{tikzpicture}
+\tikzstyle{bidir dependency}=[color=black, angle 45-angle 45, dashed]
 
-\begin{umlpackage}[x=-1, y=0,fill=black!50]{Main}
+\begin{umlpackage}[x=-1, y=0,fill=black!20]{main}
 
-    \umlclass[x=-12, y=-10]{main}{}{}
+    \umlclass[x=-12, y=-10, name=MainClass]{Main}{}{}
 
     % DOCS
 
@@ -24,7 +25,7 @@
     \begin{umlpackage}[x=0, y=0,fill=white]{factory}
 
         \umlclass[x=0, y=-2]{DocumentFactory}{}{}
-        \umlclass[x=0, y=-3.5,fill=blue!65]{DocumentData<record>}{}{}
+        \umlclass[x=0, y=-3.5,fill=blue!20]{DocumentData<record>}{}{}
 
     \end{umlpackage}
 
@@ -33,7 +34,7 @@
 
     \begin{umlpackage}[x=3, y=-6,fill=white]{logs}
 
-        \umlclass[x=0, y=-2,fill=blue!65]{ChangeLogEntry<record>}{}{}
+        \umlclass[x=0, y=-2,fill=blue!20]{ChangeLogEntry<record>}{}{}
         \umlclass[x=0, y=-3.5,fill=orange!30]{ChangeType<enum>}{}{}
 
     \end{umlpackage}
@@ -43,9 +44,9 @@
 
     \begin{umlpackage}[x=2, y=-11,fill=white]{storage}
 
-        \umlclass[x=0, y=-2,fill=purple]{DocumentStorage<interface>}{}{}
+        \umlclass[x=0, y=-2,fill=purple!20]{DocumentStorage<interface>}{}{}
         \umlclass[x=0, y=-6]{JsonDocumentStorage}{}{}
-        \umlclass[x=0, y=-4,fill=blue!65]{DocumentJson<record>}{}{}
+        \umlclass[x=0, y=-4,fill=blue!20]{DocumentJson<record>}{}{}
 
     \end{umlpackage}
 
@@ -54,7 +55,7 @@
 
     \begin{umlpackage}[x=-8, y=-11,fill=white]{users}
 
-        \umlclass[x=-3.2, y=-3.2,fill=purple]{Berechtigung<interface>}{}{}
+        \umlclass[x=-3.2, y=-3.2,fill=purple!20]{Berechtigung<interface>}{}{}
 
         \begin{umlpackage}[x=-2, y=-4]{human}
 
@@ -80,19 +81,19 @@
     % ABHAENGIGKEITEN
 
     % docs <-> factory und docs <-> storage
-    \umlrelation[]{docs}{factory}
-    \umlrelation[]{docs}{storage}
+    \umlrelation[style={bidir dependency}]{docs}{factory}
+    \umlrelation[style={bidir dependency}]{docs}{storage}
     \umldep{docs}{logs}
     \umldep{storage}{logs}
     % docs nutzt HumanUsers (users.human) und ExternalAPIClient (users.client)
     \umldep{docs}{users}
     \umldep{human}{Berechtigung<interface>}
     \umldep{client}{Berechtigung<interface>}
-    \umldep{main}{docs}
-    \umldep{main}{factory}
-    \umldep{main}{storage}
+    \umldep{MainClass}{docs}
+    \umldep{MainClass}{factory}
+    \umldep{MainClass}{storage}
     % Main nutzt Benutzer aus users.human und users.client
-    \umldep{main}{users}
+    \umldep{MainClass}{users}
 
     
 \end{umlpackage}

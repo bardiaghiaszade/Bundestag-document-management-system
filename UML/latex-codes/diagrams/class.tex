@@ -1,6 +1,8 @@
 \begin{landscape}
+\section{klassendiagramm}
 
 \begin{center}
+\resizebox{!}{0.82\textheight}{%
 \begin{tikzpicture}[scale=0.45, transform shape]
 
 
@@ -10,7 +12,7 @@
 \umlclass[x=0, y=12, name=mainClass]{Main}
 {}
 {
-    + main(args : String[]) : void {static}
+    + main(args : String[]) : void \{static\}
 }
 
 
@@ -20,9 +22,9 @@
 
 \umlclass[x=-20, y=7, name=documentClass, fill=green!20]{Document<abstract>}
 {
-    - id : int {readOnly} \\
+    - id : int \{readOnly\} \\
     - title : String \\
-    - createdAt : LocalDateTime {readOnly} \\
+    - createdAt : LocalDateTime \{readOnly\} \\
     - updatedAt : LocalDateTime \\
     - isPublic : boolean \\
     - text : String
@@ -45,7 +47,7 @@
 
 \umlclass[x=-7.5, y=3.5, name=documentEditor]{DocumentEditor}
 { 
-    - storage : DocumentStorage {readOnly}
+    - storage : DocumentStorage \{readOnly\}
 }
 {
     + DocumentEditor(storage : DocumentStorage) \\
@@ -78,8 +80,8 @@
 
 \umlclass[x=-14, y=-30, name=rede]{Rede}
 {
-    - redner : String {readOnly} \\
-    - partei : String {readOnly}
+    - redner : String \{readOnly\} \\
+    - partei : String \{readOnly\}
 }
 {
     + Rede(id, title, isPublic, redner, partei, text, createdAt, updatedAt) \\
@@ -89,8 +91,8 @@
 
 \umlclass[x=-20, y=-25, name=protokoll]{Protokoll}
 {
-    - sitzungsnummer : int {readOnly} \\
-    - redeListe : List<Rede> {readOnly}
+    - sitzungsnummer : int \{readOnly\} \\
+    - redeListe : List<Rede> \{readOnly\}
 }
 {
     + Protokoll(id, title, isPublic, sitzungsnummer, text, createdAt, updatedAt, reden) \\
@@ -109,10 +111,10 @@
 {}
 {
     - DocumentFactory() \\
-    + create(d : DocumentData) : Document {static}
+    + create(d : DocumentData) : Document \{static\}
 }
 
-\umlclass[x=-3, y=-9, name=documentData, fill=blue!65]{DocumentData<record>}
+\umlclass[x=-3, y=-9, name=documentData, fill=blue!20]{DocumentData<record>}
 {
     - type : DocumentType \\
     - id : int \\
@@ -140,7 +142,7 @@
 % LOGS
 
 
-\umlclass[x=7, y=7.5, name=changeLogEntry, fill=blue!65]{ChangeLogEntry<record>}
+\umlclass[x=7, y=7.5, name=changeLogEntry, fill=blue!20]{ChangeLogEntry<record>}
 {
     - documentId : int \\
     - userId : int \\
@@ -149,7 +151,7 @@
     - field : String \\
     - oldValue : String \\
     - newValue : String \\
-    + toString : String
+    + toString() : String
 }
 {
     + ChangeLogEntry(...) \\
@@ -178,7 +180,7 @@
 % STORAGE
 
 
-\umlclass[x=15, y=1.5, name=documentStorage, fill=purple]{DocumentStorage<interface>}
+\umlclass[x=15, y=1.5, name=documentStorage, fill=purple!20]{DocumentStorage<interface>}
 {}
 {
     + saveDocument(document : Document) : void \\
@@ -189,9 +191,9 @@
 
 \umlclass[x=15, y=-4, name=jsonDocumentStorage]{JsonDocumentStorage}
 {
-    - documentsFile : Path {readOnly} \\
-    - changeLogFile : Path {readOnly} \\
-    - mapper : ObjectMapper {readOnly}
+    - documentsFile : Path \{readOnly\} \\
+    - changeLogFile : Path \{readOnly\} \\
+    - mapper : ObjectMapper \{readOnly\}
 }
 {
     + JsonDocumentStorage(documentsFile, changeLogFile) \\
@@ -199,12 +201,12 @@
     + loadAllDocuments() : List<Document> \\
     + appendLogEntry(entry) : void \\
     + loadLogEntries() : List<ChangeLogEntry> \\
-    - toJson(d : Document) : DocumentJson {static} \\
+    - toJson(d : Document) : DocumentJson \{static\} \\
     - read(file, type) : List<T> \\
     - write(file, data) : void
 }
 
-\umlclass[x=-5, y=-21, name=documentJson, fill=blue!65]{DocumentJson<record>}
+\umlclass[x=-5, y=-21, name=documentJson, fill=blue!20]{DocumentJson<record>}
 {
     - type : DocumentType \\
     - id : int \\
@@ -238,7 +240,7 @@
 % USERS
 
 
-\umlclass[x=15, y=-9, name=berechtigung, fill=purple]{Berechtigung<interface>}
+\umlclass[x=15, y=-9, name=berechtigung, fill=purple!20]{Berechtigung<interface>}
 {}
 {
     + darfBenutzerVerwalten() : boolean \\
@@ -248,9 +250,9 @@
 
 \umlclass[x=7, y=-14, name=humanUsers, fill=green!20]{HumanUsers<abstract>}
 {
-    - id : int {readOnly} \\
-    - first\_name : String {readOnly} \\
-    - last\_name : String {readOnly} \\
+    - id : int \{readOnly\} \\
+    - first\_name : String \{readOnly\} \\
+    - last\_name : String \{readOnly\} \\
     - partei : String
 }
 {
@@ -300,8 +302,8 @@
 
 \umlclass[x=15.5, y=-14, name=externalAPIClient]{ExternalAPIClient}
 {
-    - id : int {readOnly} \\
-    - apiKeyHash : String {readOnly} \\
+    - id : int \{readOnly\} \\
+    - apiKeyHash : String \{readOnly\} \\
     - isActive : boolean
 }
 {
@@ -353,13 +355,13 @@
 \umlinherit{protokoll}{documentClass}
 
 % Protokoll contains a list of Rede objects
-\umluniaggreg{protokoll}{rede}
+\umluniaggreg[mult1=0..*, mult2=0..*, arg2=redeListe]{protokoll}{rede}
 
 
 % DOCUMENT EDITOR 
 
 % Actual stored field
-\umluniassoc{documentEditor}{documentStorage}
+\umluniassoc[mult1=0..*, mult2=1, arg2=storage]{documentEditor}{documentStorage}
 
 % Uses / method parameters / return types
 \umlHVdep{documentEditor}{documentFactory}
@@ -404,9 +406,9 @@
 
 % RECORDS AND ENUMS 
 
-\umlHVdep{documentData}{documentType}
-\umlHVdep{documentJson}{documentType}
-\umlHVdep{changeLogEntry}{changeType}
+\umluniassoc[mult1=0..*, mult2=1, arg2=type]{documentData}{documentType}
+\umluniassoc[mult1=0..*, mult2=1, arg2=type]{documentJson}{documentType}
+\umluniassoc[mult1=0..*, mult2=1, arg2=type]{changeLogEntry}{changeType}
 
 
 % USERS 
@@ -424,7 +426,8 @@
 \umlinherit{abgeordneter}{humanUsers}
 
 
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 
 \end{landscape}
